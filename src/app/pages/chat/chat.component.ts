@@ -50,7 +50,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   private scrollToEnd(): void {
     setTimeout(() => {
-      var element: HTMLElement = document.getElementById(this.chatContainerId)!;
+      var element: HTMLElement = document.getElementById(this.chatContainerId) as HTMLElement;
       element.scrollTop = element.scrollHeight;
     }, 0);
   }
@@ -60,17 +60,17 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   isCollapsed(msgId: string): boolean {
-    var element: HTMLElement = document.getElementById(msgId)!;
+    var element: HTMLElement = document?.getElementById(msgId) as HTMLElement;
     return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
   }
 
   isExpandable(msgId: string): boolean {
-    var element: HTMLElement = document.getElementById(msgId)!;
+    var element: HTMLElement = document.getElementById(msgId) as HTMLElement;
     return element.classList.contains('expanded');
   }
 
   toggleText(msgId: string): void {
-    var element: HTMLElement = document.getElementById(msgId)!;
+    var element: HTMLElement = document.getElementById(msgId) as HTMLElement;
     element.classList.toggle('collapsed');
     element.classList.toggle('expanded');
   }
