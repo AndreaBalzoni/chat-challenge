@@ -1,6 +1,7 @@
 # ChatChallenge
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.4.
+Node version: v14.17.6.
 
 ## Development server
 
