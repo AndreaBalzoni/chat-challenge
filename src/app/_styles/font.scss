@@ -1,0 +1,17 @@
+@import url('http://fonts.cdnfonts.com/css/univers-lt-std'); 
+
+$normal-font-size: 16px;
+$small-font-size: 14px; // 14px
+$smaller-font-size: 12px; // 12px
+
+$small-line-height: 18px; // 18px
+$normal-line-height: 22px; // 22px
+
+$font-family-normal: "Univers LT Std";
+$font-family-bold: "Univers LT Std";
+
+$message-content-font: normal normal normal 16px/22px $font-family-normal;
+$message-sender-font: normal normal bold 14px/18px $font-family-bold;
+$message-timestamp-font: normal normal normal 12px/18px $font-family-normal;
+$button-font: normal normal normal 16px/26px $font-family-normal;
+$placeholder-font: normal normal normal 16px/24CACFDpx $font-family-normal;

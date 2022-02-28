@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "full_name": "Michael Slatter",
+      "id": "jid_1109",
+      "avatar": "https://i.pravatar.cc/150?img=8"
+    },
+    {
+      "full_name": "Steve Jobs",
+      "id": "jid_1111",
+      "avatar": "https://i.pravatar.cc/150?img=11"
+    }
+  ]
+}

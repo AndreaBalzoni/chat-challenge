@@ -1,0 +1,193 @@
+@import './../../_styles/colors.scss';
+@import './../../_styles/font.scss';
+
+$pseudo-el-size: 8px;
+$scrollbar-color: #0E141A1A;
+$avatar-margin: 24px;
+$avatar-width: 40px;
+
+.content-wrapper {
+  display: flex;
+  height: 100%;
+}
+
+.chat-wrapper {
+  width: 58%;
+  height: 55%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 3px 6px $right-chat-color;
+}
+
+#chat-container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  margin: auto;
+  height: 78%;
+  overflow-y: scroll;
+  padding: 1em $avatar-margin;
+  mask-image: linear-gradient(to bottom, transparent 5%, black 25%);
+  .message-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 75%;
+    row-gap: 0.5em;
+    &.right-align {
+      align-items: flex-end;
+      align-self: flex-end;
+      .message-content {
+        background-color: $right-chat-color;
+        &:after {
+          content: '';
+          position: absolute;
+          width: 0;
+          height: 0;
+          top: 0;
+          border-top: 16px solid $right-chat-color;
+          border-right: $pseudo-el-size solid transparent;
+          right: -$pseudo-el-size;
+        }
+      }
+      .sender-avatar {
+        margin-left: $avatar-margin;
+      }
+      .message-details {
+        padding-right: $avatar-margin + $avatar-width;
+      }
+    }
+    &.left-align {
+      align-items: flex-start;
+      align-self: flex-start;
+      .message-content {
+        background-color: $left-chat-color;
+        &:after {
+          content: '';
+          position: absolute;
+          width: 0;
+          height: 0;
+          top: 0;
+          border-top: 16px solid $left-chat-color;
+          border-left: $pseudo-el-size solid transparent;
+          left: -$pseudo-el-size;
+        }
+      }
+      .sender-avatar {
+        margin-right: $avatar-margin;
+      }
+      .message-details {
+        padding-left: $avatar-margin + $avatar-width;
+      }
+      .message-container {
+        flex-direction: row-reverse;
+      }
+    }
+    
+    .message-container {
+      width: 100%;
+      display: flex;
+      .message-content {
+        padding: 25px 40px;
+        position: relative;
+        font: $message-content-font;
+        flex: 1 1 0%;
+        span {
+          &.collapsed {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+          }
+        }
+        .read-more {
+          text-align: end;
+          font-size: $small-font-size;
+          color: rgb(0, 116, 204);
+          cursor: pointer;
+        }
+      }
+      .sender-avatar {
+        img {
+          border-radius: 50%;
+          width: $avatar-width;
+        }
+      }
+    }
+    .message-details {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      .sender {
+        font: $message-sender-font;
+      }
+      .timestamp {
+        color: $message-timestamp-color;
+        font: $message-timestamp-font;
+      }
+    }
+  }
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  /* Track */
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px $scrollbar-color; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: $message-timestamp-color; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: darken($scrollbar-color, 5%); 
+  }
+}
+
+#input-wrapper {
+  background-color: $left-chat-color;
+  padding: 10px 20px 8px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1 1 0%;
+  input[type=text] {
+    width: 100%;
+    height: 48px;
+    padding: 16px 20px;
+    border: 1px solid $right-chat-color;
+    border-radius: 3px;
+    &::placeholder {
+      color: $placeholder-color;
+      font: $placeholder-font;
+    }    
+  }
+  .button-div {
+    display: flex;
+    justify-content: flex-end;
+    box-sizing: border-box;
+    button {
+      margin: auto 0;
+      width: 90px;
+      height: 35px;
+      border: none;
+      border-radius: 4px;
+      background-color: $button-color;
+      color: white;
+      font: $button-font;
+      cursor: pointer;
+      &:disabled {
+        cursor: unset;
+        opacity: 0.7;
+      }
+    }
+  }
+}
