@@ -1,7 +1,7 @@
 import { Message } from '../../_interfaces/message.interface';
 import { User } from '../../_interfaces/user.interface';
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import * as moment from 'moment';
+import moment from 'moment';
 
 @Component({
   selector: 'app-chat-message',
