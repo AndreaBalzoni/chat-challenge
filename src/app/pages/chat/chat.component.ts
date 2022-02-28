@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import chat from '../../../assets/mock/chat.json';
 import users from '../../../assets/mock/users.json';
 import { User } from '../../_interfaces/user.interface';
@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit, OnDestroy {
+export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   public chat: any;
   public users: any;
   public moment: any;
@@ -27,7 +27,8 @@ export class ChatComponent implements OnInit, OnDestroy {
   public senderFilter: string;
 
   constructor(
-    private cs: ChatServiceService
+    private cs: ChatServiceService,
+    private cdRef:ChangeDetectorRef
   ) {
     this.chat = chat;
     this.users = users.users;
@@ -37,8 +38,11 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.senderFilter = '';
     this.cs = cs;
   }
-
+  
   ngOnInit(): void {
+  }
+  
+  ngAfterViewInit() {
     this.chatSub = this.cs.getNewChat().subscribe({
       next: (res) => {
         this.newMessages = res;
@@ -46,6 +50,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.scrollToEnd();
       }
     });
+    this.cdRef.detectChanges();
   }
 
   private scrollToEnd(): void {
@@ -91,7 +96,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     f.resetForm();
   }
 
-  filterByUser(senderId: string) {
+  filterByUser(senderId: string): void {
     this.senderFilter = this.senderFilter ? '' : senderId;
   }
 
