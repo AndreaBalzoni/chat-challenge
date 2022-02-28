@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { ChatComponent } from './pages/chat/chat.component';
 import { ChatMessageComponent } from './components/chat-message/chat-message.component';
 import { FormsModule } from '@angular/forms';
+import { FilterByUserPipe } from './pipes/filter-by-user.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     ChatComponent,
-    ChatMessageComponent
+    ChatMessageComponent,
+    FilterByUserPipe
   ],
   imports: [
     BrowserModule,

@@ -24,6 +24,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   public chatContainerId: string = 'chat-container';
   public newMessages: Message[] = [];
   chatSub: Subscription = new Subscription();
+  public senderFilter: string;
 
   constructor(
     private cs: ChatServiceService
@@ -33,6 +34,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.currentUser = users.users[0];
     this.otherUser = users.users[1];
     this.moment = moment;
+    this.senderFilter = '';
     this.cs = cs;
   }
 
@@ -87,6 +89,10 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.cs.storeNewChat(this.newMessages);
     this.scrollToEnd();
     f.resetForm();
+  }
+
+  filterByUser(senderId: string) {
+    this.senderFilter = this.senderFilter ? '' : senderId;
   }
 
   ngOnDestroy(): void {

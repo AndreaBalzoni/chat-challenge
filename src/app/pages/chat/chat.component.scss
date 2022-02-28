@@ -30,6 +30,7 @@ $avatar-width: 40px;
   overflow-y: scroll;
   padding: 1em $avatar-margin;
   mask-image: linear-gradient(to bottom, transparent 5%, black 25%);
+  width: 100%;
   .message-wrapper {
     display: flex;
     flex-direction: column;
@@ -114,6 +115,7 @@ $avatar-width: 40px;
         img {
           border-radius: 50%;
           width: $avatar-width;
+          cursor: pointer;
         }
       }
     }
