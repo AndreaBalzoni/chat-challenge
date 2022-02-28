@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import chat from '@/../assets/mock/chat.json';
-import users from '@/../assets/mock/users.json';
-import { User } from '@/_interfaces/user.interface';
-import { ChatServiceService } from '@/services/chat-service.service';
+import chat from '../../../assets/mock/chat.json';
+import users from '../../../assets/mock/users.json';
+import { User } from '../../_interfaces/user.interface';
+import { ChatServiceService } from '../../services/chat-service.service';
 import moment from 'moment';
 import { NgForm } from '@angular/forms';
-import { Message } from '@/_interfaces/message.interface';
+import { Message } from '../../_interfaces/message.interface';
 import { Subscription } from 'rxjs';
 
 // const moment = require('moment');

@@ -1,4 +1,4 @@
-import { Message } from '@/_interfaces/message.interface';
+import { Message } from '../_interfaces/message.interface';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 

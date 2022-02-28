@@ -1,4 +1,4 @@
-import { Message } from '@/_interfaces/message.interface';
+import { Message } from '../_interfaces/message.interface';
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
