@@ -1,29 +1,8 @@
 <div class="content-wrapper">
   <div class="chat-wrapper">
-    <div id="{{ this.chatContainerId }}">
-      <div class="message-wrapper" *ngFor="let message of chat.messages | filterByUser: senderFilter; let i = index" [ngClass]="currentUser.id == message.from ? 'right-align' : 'left-align'">
-        <div class="message-details">
-          <span class="sender">{{ message.from === currentUser.id ? 'You' : message.sender_name}}</span>
-          <span class="timestamp">{{ this.moment(message.timestamp).format('DD/MM/YYYY - h:mm:ss A') }}</span>
-        </div>
-        <div class="message-container">
-          <div class="message-content">
-            <span class="message collapsed" id="{{ 'msg-' + i }}">
-              {{ message.text }}
-            </span>
-            <span class="read-more collapsed" *ngIf="isCollapsed('msg-' + i); else readLess" (click)="toggleText('msg-' + i)">
-              read more
-            </span>
-            <ng-template #readLess>
-              <span class="read-more collapsed" *ngIf="isExpandable('msg-' + i)" (click)="toggleText('msg-' + i)">
-                read less
-              </span>
-            </ng-template>
-          </div>
-          <div class="sender-avatar">
-            <img src="{{ returnAvatar(message.from) }}" (click)="filterByUser(message.from)">
-          </div>
-        </div>
+    <div #chatContainer id="chat-container">
+      <div class="asdomar" *ngFor="let message of chat.messages | filterByUser: senderFilter; let i = index" [ngClass]="currentUser.id == message.from ? 'right-align' : 'left-align'">
+        <app-chat-message [message]="message" [users]="users" [currentUser]="currentUser" [index]="i" (emitSenderId)='setSenderId($event)'></app-chat-message>
       </div>
     </div>
     <form id="input-wrapper" #f="ngForm" (submit)="pushMessage(f)">

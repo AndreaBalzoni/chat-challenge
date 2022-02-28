@@ -1,1 +1,24 @@
-<p>chat-message works!</p>
+<div class="message-wrapper" [ngClass]="currentUser.id == message.from ? 'right-align' : 'left-align'">
+  <div class="message-details">
+    <span class="sender">{{ message.from === currentUser.id ? 'You' : message.sender_name}}</span>
+    <span class="timestamp">{{ this.moment(message.timestamp).format('DD/MM/YYYY - h:mm:ss A') }}</span>
+  </div>
+  <div class="message-container">
+    <div class="message-content">
+      <span #msg class="message collapsed" id="{{ 'msg-' + index }}">
+        {{ message.text }}
+      </span>
+      <span class="read-more collapsed" *ngIf="isCollapsed(); else readLess" (click)="toggleText()">
+        read more
+      </span>
+      <ng-template #readLess>
+        <span class="read-more collapsed" *ngIf="isExpandable()" (click)="toggleText()">
+          read less
+        </span>
+      </ng-template>
+    </div>
+    <div class="sender-avatar">
+      <img src="{{ returnAvatar(message.from) }}" (click)="filterByUser(message.from)">
+    </div>
+  </div>
+</div>

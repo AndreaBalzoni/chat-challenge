@@ -1,0 +1,99 @@
+@import './../../pages/chat/chat.component.scss';
+
+.message-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
+  row-gap: 0.5em;
+  &.right-align {
+    .message-content {
+      background-color: $right-chat-color;
+      &:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        top: 0;
+        border-top: 16px solid $right-chat-color;
+        border-right: $pseudo-el-size solid transparent;
+        right: -$pseudo-el-size;
+      }
+    }
+    .sender-avatar {
+      margin-left: $avatar-margin;
+    }
+    .message-details {
+      padding-right: $avatar-margin + $avatar-width;
+    }
+  }
+  &.left-align {
+    .message-content {
+      background-color: $left-chat-color;
+      &:after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 0;
+        top: 0;
+        border-top: 16px solid $left-chat-color;
+        border-left: $pseudo-el-size solid transparent;
+        left: -$pseudo-el-size;
+      }
+    }
+    .sender-avatar {
+      margin-right: $avatar-margin;
+    }
+    .message-details {
+      padding-left: $avatar-margin + $avatar-width;
+    }
+    .message-container {
+      flex-direction: row-reverse;
+    }
+  }
+  
+  .message-container {
+    width: 100%;
+    display: flex;
+    .message-content {
+      padding: 25px 40px;
+      position: relative;
+      font: $message-content-font;
+      flex: 1 1 0%;
+      span {
+        &.collapsed {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+        }
+      }
+      .read-more {
+        text-align: end;
+        font-size: $small-font-size;
+        color: rgb(0, 116, 204);
+        cursor: pointer;
+      }
+    }
+    .sender-avatar {
+      img {
+        border-radius: 50%;
+        width: $avatar-width;
+        cursor: pointer;
+      }
+    }
+  }
+  .message-details {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    .sender {
+      font: $message-sender-font;
+    }
+    .timestamp {
+      color: $message-timestamp-color;
+      font: $message-timestamp-font;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
 import chat from '../../../assets/mock/chat.json';
 import users from '../../../assets/mock/users.json';
 import { User } from '../../_interfaces/user.interface';
@@ -7,8 +7,6 @@ import moment from 'moment';
 import { NgForm } from '@angular/forms';
 import { Message } from '../../_interfaces/message.interface';
 import { Subscription } from 'rxjs';
-
-// const moment = require('moment');
 
 @Component({
   selector: 'app-chat',
@@ -21,10 +19,12 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
   public moment: any;
   public currentUser: User;
   public otherUser: User;
-  public chatContainerId: string = 'chat-container';
   public newMessages: Message[] = [];
-  chatSub: Subscription = new Subscription();
   public senderFilter: string;
+
+  chatSub: Subscription = new Subscription();
+
+  @ViewChild('chatContainer') containerEl: ElementRef;
 
   constructor(
     private cs: ChatServiceService,
@@ -34,9 +34,8 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     this.users = users.users;
     this.currentUser = users.users[0];
     this.otherUser = users.users[1];
-    this.moment = moment;
-    this.senderFilter = '';
     this.cs = cs;
+    this.senderFilter = '';
   }
   
   ngOnInit(): void {
@@ -55,29 +54,8 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private scrollToEnd(): void {
     setTimeout(() => {
-      var element: HTMLElement = document.getElementById(this.chatContainerId) as HTMLElement;
-      element.scrollTop = element.scrollHeight;
+      this.containerEl.nativeElement.scrollTop = this.containerEl.nativeElement.scrollHeight;
     }, 0);
-  }
-
-  returnAvatar(senderId: string): string {
-    return this.users.find((u: User) => u.id === senderId).avatar;
-  }
-
-  isCollapsed(msgId: string): boolean {
-    var element: HTMLElement = document?.getElementById(msgId) as HTMLElement;
-    return element.scrollHeight > element.clientHeight || element.scrollWidth > element.clientWidth;
-  }
-
-  isExpandable(msgId: string): boolean {
-    var element: HTMLElement = document.getElementById(msgId) as HTMLElement;
-    return element.classList.contains('expanded');
-  }
-
-  toggleText(msgId: string): void {
-    var element: HTMLElement = document.getElementById(msgId) as HTMLElement;
-    element.classList.toggle('collapsed');
-    element.classList.toggle('expanded');
   }
 
   pushMessage(f: NgForm): void {
@@ -96,8 +74,9 @@ export class ChatComponent implements OnInit, OnDestroy, AfterViewInit {
     f.resetForm();
   }
 
-  filterByUser(senderId: string): void {
-    this.senderFilter = this.senderFilter ? '' : senderId;
+  setSenderId(event: string): void {
+    this.senderFilter = this.senderFilter ? '' : event;
+    this.cdRef.detectChanges();
   }
 
   ngOnDestroy(): void {
